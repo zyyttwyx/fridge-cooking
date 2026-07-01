@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>冰箱剩菜盲盒 - 让剩菜变美食</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app">
+        <header class="header">
+            <div class="logo">
+                <span class="logo-icon">🧊</span>
+                <h1>冰箱剩菜盲盒</h1>
+            </div>
+            <nav class="nav">
+                <button class="nav-btn active" data-page="fridge">🥗 冰箱食材</button>
+                <button class="nav-btn" data-page="recipes">🍳 食谱匹配</button>
+                <button class="nav-btn" data-page="favorites">⭐ 我的收藏</button>
+                <button class="nav-btn" data-page="memo">📝 买菜备忘</button>
+            </nav>
+        </header>
+
+        <main class="main">
+            <div class="page active" id="page-fridge">
+                <div class="page-header">
+                    <div class="page-header-top">
+                        <h2>🥗 我的冰箱</h2>
+                        <button class="btn-add" id="addIngredientBtn">+ 添加食材</button>
+                    </div>
+                    <p>勾选你冰箱里有的食材，看看能做出什么美味！</p>
+                    <div class="selected-info">
+                        已选择 <span id="selectedCount">0</span> 种食材
+                        <button class="btn-primary" id="matchBtn" disabled>🎲 开始匹配</button>
+                    </div>
+                </div>
+                <div class="category-tabs" id="categoryTabs"></div>
+                <div class="ingredient-grid" id="ingredientGrid"></div>
+            </div>
+
+            <div class="page" id="page-recipes">
+                <div class="page-header">
+                    <h2>🍳 食谱匹配</h2>
+                    <p>根据你冰箱里的食材，为你推荐最适合的食谱</p>
+                </div>
+                <div class="recipe-result" id="recipeResult">
+                    <div class="empty-state">
+                        <div class="empty-icon">🍽️</div>
+                        <p>还没有匹配结果</p>
+                        <p class="empty-tip">去「冰箱食材」页面勾选食材，开始你的美食之旅吧！</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page" id="page-favorites">
+                <div class="page-header">
+                    <h2>⭐ 我的收藏</h2>
+                    <p>收藏你喜欢的食谱，随时查看！</p>
+                </div>
+                <div class="recipe-result" id="favoriteList">
+                    <div class="empty-state">
+                        <div class="empty-icon">💝</div>
+                        <p>还没有收藏的食谱</p>
+                        <p class="empty-tip">看到喜欢的食谱，点击收藏按钮吧！</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page" id="page-memo">
+                <div class="page-header">
+                    <h2>📝 买菜备忘录</h2>
+                    <p>记录明天需要购买的食材，告别遗忘！</p>
+                </div>
+                <div class="memo-input">
+                    <input type="text" id="memoInput" placeholder="输入需要买的食材..." />
+                    <button class="btn-add" id="addMemoBtn">+ 添加</button>
+                </div>
+                <div class="memo-list" id="memoList"></div>
+            </div>
+        </main>
+
+        <div class="modal" id="recipeModal">
+            <div class="modal-content">
+                <span class="close" id="closeModal">&times;</span>
+                <div id="recipeDetail"></div>
+            </div>
+        </div>
+
+        <div class="modal" id="addIngredientModal">
+            <div class="modal-content small-modal">
+                <span class="close" id="closeAddModal">&times;</span>
+                <div class="modal-body">
+                    <h3>➕ 添加新食材</h3>
+                    <div class="form-group">
+                        <label>食材名称</label>
+                        <input type="text" id="newIngredientName" placeholder="例如：酸菜">
+                    </div>
+                    <div class="form-group">
+                        <label>数量（可选）</label>
+                        <input type="text" id="newIngredientQuantity" placeholder="例如：500克、2个">
+                    </div>
+                    <div class="form-group">
+                        <label>过期日期（可选）</label>
+                        <input type="date" id="newIngredientExpireDate">
+                    </div>
+                    <div class="form-group">
+                        <label>食材分类</label>
+                        <select id="newIngredientCategory">
+                            <option value="蔬菜">🥬 蔬菜</option>
+                            <option value="肉类">🥩 肉类</option>
+                            <option value="蛋类">🥚 蛋类</option>
+                            <option value="豆制品">🧈 豆制品</option>
+                            <option value="菌类">🍄 菌类</option>
+                            <option value="调料">🧂 调料</option>
+                        </select>
+                    </div>
+                    <button class="btn-primary full-width" id="submitIngredientBtn">确认添加</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="toast" id="toast"></div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
